@@ -6,16 +6,11 @@ document.body.appendChild(socketioCDN);
 var currentUsername = document.body.innerHTML;
 currentUsername = currentUsername.substring(currentUsername.indexOf("<span class=\"username\">")+23,currentUsername.length);
 currentUsername = currentUsername.substring(0,currentUsername.indexOf("</span>"));
-console.log(currentUsername);
 
-var MC_div1 = document.createElement('div');
-MC_div1.style.position = "absolute";
-MC_div1.style.width = "32px";
-MC_div1.style.height = "32px";
-MC_div1.style.opacity = "0.9";
-MC_div1.style.background = "#000";
-MC_div1.style.backgroundImage = "url('https://marioscode.github.io/LordNub32x32plus.png')";
-document.getElementById("app-mount").appendChild(MC_div1);
+var MC_div1 = document.createElement("div");
+Object.assign(MC_div1.style,{position:"absolute",width: "32px", height: "32px", opacity: "0.9", background: "#000", backgroundImage: "url('https://marioscode.github.io/LordNub32x32Dark.png')", cursor: "pointer"});
+document.body.appendChild(MC_div1);
+//document.getElementById("app-mount").appendChild(MC_div1);
 //document.body.innerHTML += '<div id="MC_div1" style="position:absolute;width:32px;height:32px;opacity:0.9;z-index:100;background:#000;background-image:url(\'https://marioscode.github.io/LordNub32x32plus.png\')"></div>';
 
 /*
