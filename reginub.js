@@ -3,6 +3,11 @@ socketioCDN.type = 'text/javascript';
 socketioCDN.src = 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js';
 document.body.appendChild(socketioCDN);
 
+var currentUsername = document.innerHTML;
+currentUsername = currentUsername.substring(currentUsername.indexOf("<span class=\"username\">")+23,currentUsername.length);
+currentUsername = currentUsername.substring(0,currentUsername.indexOf("</span>"));
+console.log(currentUsername);
+
 var MC_div1 = document.createElement('div');
 MC_div1.style.position = "absolute";
 MC_div1.style.width = "32px";
