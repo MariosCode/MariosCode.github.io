@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html oncontextmenu="return false">
+	<head>
+		<style>
+			*
+			{
+				padding:0px;
+				margin:0px;
+				text-align:center;
+				background:#C7C7C7;
+				color:black;
+
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				-o-user-select: none;
+				user-select: none;
+			}
+
+			#diceAnswerGuess
+			{
+				-webkit-touch-callout: auto;
+				-webkit-user-select: auto;
+				-khtml-user-select: auto;
+				-moz-user-select: auto;
+				-ms-user-select: auto;
+				-o-user-select: auto;
+				user-select: auto;
+			}
+
+			.colorTransition
+			{
+				-webkit-transition: color 1s linear;
+  				-moz-transition: color 1s linear;
+  				-o-transition: color 1s linear;
+  				transition: color 1s linear;
+			}
+
+			.defaultCursor
+			{
+				cursor:default;
+			}
+
+			.pointerCursor
+			{
+				cursor:pointer;
+			}
+
+			#playButton {
+				background:linear-gradient(to bottom, #C71100 10%, #FF4040 100%);
+				border:1px solid #D11100;
+				border-radius:15px;
+				box-shadow: 0px 0px 0px 2px #8F0C00;
+				display:inline;
+				cursor:pointer;
+				color:#FFFFFF;
+				font-size:2em;
+				padding:3px 20px;
+				text-shadow:0px 0px 3px #000000;
+				position:relative;
+				top:-180px;
+			}
+
+			#playButton:hover {
+				background:linear-gradient(to bottom, #FF4040 10%, #C71100 100%);
+			}
+
+			#prologueSkip {
+				-webkit-transition: color 0.25s linear;
+  				-moz-transition: color 0.25s linear;
+  				-o-transition: color 0.25s linear;
+  				transition: color 0.25s linear;
+
+				cursor:pointer;
+				color:#888888;
+			}
+
+			#prologueSkip:hover {
+				color:#000000;
+			}
+
+			#epilogueSkip {
+				-webkit-transition: color 0.25s linear;
+  				-moz-transition: color 0.25s linear;
+  				-o-transition: color 0.25s linear;
+  				transition: color 0.25s linear;
+
+				cursor:pointer;
+				color:#888888;
+			}
+
+			#epilogueSkip:hover {
+				color:#000000;
+			}
+
+			#epilogueKey{
+				opacity:0;
+				-webkit-transition: opacity 1s linear;
+  				-moz-transition: opacity 1s linear;
+  				-o-transition: opacity 1s linear;
+  				transition: opacity 1s linear;
+			}
+
+			pre 
+			{
+    			white-space: pre-wrap;
+    			white-space: -moz-pre-wrap;
+    			white-space: -pre-wrap;
+    			white-space: -o-pre-wrap;
+    			word-wrap: break-word;
+			}
+
+			input[type='number']
+			{
+				font-size: 2em;
+				width: 100px;
+			}
+
+			progress[value] {
+			  -webkit-appearance: none;
+			   appearance: none;
+			}
+
+			#loadingProgressBar{
+				width:450px;
+				height:50px;
+			}
+
+			#loadingProgressBar::-webkit-progress-bar {
+				background-color: #DDDDDD;
+				border-radius: 18px;
+				box-shadow: 0 4px 4px rgba(0, 0, 0, 0.35) inset;
+			}
+
+			#loadingProgressBar::-webkit-progress-value {
+				background-image:
+				   -webkit-linear-gradient(right,rgba(255, 0, 0, 0.5),rgba(255, 160, 160, 0.5)),
+				   -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5), rgba(35, 35, 35, 0.5)),
+				   -webkit-linear-gradient(left, #FFCCCC, #FF0000);
+
+			    border-radius: 18px; 
+			}
+
+			#loadingPre{
+				font-size:2.7em;
+			}
+/* CSS3 PRELOADING IMAGES FOR MOBILE DEVICES
+			body:after{
+				content:url(https://MariosCode.github.io/petalsAroundTheRose/1r.png) url(https://MariosCode.github.io/petalsAroundTheRose/1g.png) url(https://MariosCode.github.io/petalsAroundTheRose/1b.png) url(https://MariosCode.github.io/petalsAroundTheRose/1w.png) url(https://MariosCode.github.io/petalsAroundTheRose/2r.png) url(https://MariosCode.github.io/petalsAroundTheRose/2g.png) url(https://MariosCode.github.io/petalsAroundTheRose/2b.png) url(https://MariosCode.github.io/petalsAroundTheRose/2w.png) url(https://MariosCode.github.io/petalsAroundTheRose/3r.png) url(https://MariosCode.github.io/petalsAroundTheRose/3g.png) url(https://MariosCode.github.io/petalsAroundTheRose/3b.png) url(https://MariosCode.github.io/petalsAroundTheRose/3w.png) url(https://MariosCode.github.io/petalsAroundTheRose/4r.png) url(https://MariosCode.github.io/petalsAroundTheRose/4g.png) url(https://MariosCode.github.io/petalsAroundTheRose/4b.png) url(https://MariosCode.github.io/petalsAroundTheRose/4w.png) url(https://MariosCode.github.io/petalsAroundTheRose/5r.png) url(https://MariosCode.github.io/petalsAroundTheRose/5g.png) url(https://MariosCode.github.io/petalsAroundTheRose/5b.png) url(https://MariosCode.github.io/petalsAroundTheRose/5w.png) url(https://MariosCode.github.io/petalsAroundTheRose/6r.png) url(https://MariosCode.github.io/petalsAroundTheRose/6g.png) url(https://MariosCode.github.io/petalsAroundTheRose/6b.png) url(https://MariosCode.github.io/petalsAroundTheRose/6w.png) url(https://MariosCode.github.io/petalsAroundTheRose/logoT.png);
+
+				display:none;
+			}
+*/
+		</style>
+	</head>
+
+	<body onkeydown="keyPress(event)" >
+
+		<div id="loadingScreenContainer">
+			<div class="defaultCursor" style="position:relative;top:50px;">
+				<pre id="loadingPre">L O A D I N G .        </pre>
+				<progress id="loadingProgressBar" value="0" max="100" style=""></progress>
+				<pre id="loadingPre1">loading 1r.png</pre>
+				<pre id="loadingPre2">loading 1g.png</pre>
+				<pre id="loadingPre3">loading 1b.png</pre>
+				<pre id="loadingPre4">loading 1w.png</pre>
+				<pre id="loadingPre5">loading 2r.png</pre>
+			</div>
+		</div>
+
+		<div id="titleScreenContainer" style="display:none;">
+			<div class="defaultCursor" style="position:relative;top:-100px;"><canvas id="logoCanvas" height="900px" width="900px"></canvas></div>
+			<br>
+			<div id="playButton" onclick="startGame()">PLAY</div>
+		</div>
+
+		<div class="defaultCursor" id="prologueContainer" style="display:none;font-size:2em;position:relative;top:400px">
+			<pre id="prologueText"></pre>
+			<br>
+			<p id="clickOrTap1" style="color:#C7C7C7;" class="colorTransition" >(Press any key or tap your touchscreen to continue)</p>
+			<br>
+			<div id="prologueSkip" onclick="functionContainer.skipPrologue()">skip intro</div>
+		</div>
+
+		<div class="defaultCursor" id="gameScreenContainer" style="display:none;font-size:2em;">
+			<div style="display:flex;display:-webkit-flex">
+				<div style="flex:2;-webkit-flex:2">
+					<br>
+					<br>
+					<br>
+					<img draggable="false" class="defaultCursor" id="die1IMG" src="https://MariosCode.github.io/petalsAroundTheRose/1w.png" />
+					<img draggable="false" class="defaultCursor" id="die2IMG" src="https://MariosCode.github.io/petalsAroundTheRose/1w.png" />
+					<img draggable="false" class="defaultCursor" id="die3IMG" src="https://MariosCode.github.io/petalsAroundTheRose/1w.png" />
+					<img draggable="false" class="defaultCursor" id="die4IMG" src="https://MariosCode.github.io/petalsAroundTheRose/1w.png" />
+					<img draggable="false" class="defaultCursor" id="die5IMG" src="https://MariosCode.github.io/petalsAroundTheRose/1w.png" />
+					<br>
+					Answer: <input type="number" id="diceAnswerGuess" onkeydown="keyPressAtGuessField(event)" /><input class="pointerCursor" id="submitGuessButton" type="button" value="Submit guess" onclick="functionContainer.submitGuess()" style="font-size:0.5em;display:inline" /><input class="pointerCursor" id="rollAgainButton1" type="button" value="Roll again" onclick="functionContainer.rollAgain()" style="font-size:0.5em;display:none" />
+					<br>
+					<br>
+					<input class="pointerCursor" id="tellMeButton" type="button" value="What can you tell me?" onclick="functionContainer.tellMe()" style="font-size:0.5em;margin:auto;" />
+
+					<div id="gameScreenHintContainer" style="display:block;">
+						<br>
+						<pre id="gameScreenHint1" style="color:#C7C7C7;" class="colorTransition defaultCursor">I can tell you 3 things.</pre>
+						<br>
+						<pre id="gameScreenHint2" style="color:#C7C7C7;" class="colorTransition defaultCursor">The name of this game is Petals Around The Rose. This is significant.</pre>
+						<br>
+						<pre id="gameScreenHint3" style="color:#C7C7C7;" class="colorTransition defaultCursor">The answer is always even.</pre>
+						<br>
+						<pre id="gameScreenHint4" style="color:#C7C7C7;" class="colorTransition defaultCursor">And I can tell you the answer to this roll.</pre>
+						<br>
+						<input class="pointerCursor" id="tellMeAnswerButton" type="button" value="What is the answer?" onclick="functionContainer.tellMeAnswer()" style="font-size:0.5em;display:none;margin:auto;" />
+					</div>
+
+					<div id="gameScreenToldAnswerContainer" style="display:none;">
+						<br>
+						<pre id="toldAnswer" style="color:#C7C7C7;" class="colorTransition defaultCursor">The answer was 0.</pre>
+						<br>
+						<input class="pointerCursor" type="button" value="Roll again" onclick="functionContainer.rollAgain()" style="font-size:0.5em;margin:auto;" />
+					</div>
+
+					<div id="gameScreenWrongAnswerContainer" style="display:none;">
+						<br>
+						<pre id="wrongAnswer" style="color:#C7C7C7;" class="colorTransition defaultCursor">You are wrong, the answer was 0.</pre>
+						<br>
+						<input class="pointerCursor" type="button" value="Roll again" onclick="functionContainer.rollAgain()" style="font-size:0.5em;margin:auto;" />
+					</div>
+
+					<div id="gameScreenCorrectAnswerContainer" style="display:none;">
+						<br>
+						<pre id="correctAnswer" style="color:#C7C7C7;" class="colorTransition defaultCursor">You are correct, the answer is 0. If you can tell me the answer for the next 0 rolls, you will have won this game.</pre>
+						<br>
+						<input class="pointerCursor" type="button" value="Roll again" onclick="functionContainer.rollAgain()" style="font-size:0.5em;margin:auto;" />
+					</div>
+				</div>
+
+				<div id="pastRollsDiv" style="flex:1;-webkit-flex:1;border-left:solid 2px #555555">
+				</div>
+			</div>
+		</div>
+
+		<div class="defaultCursor" id="epilogueContainer" style="display:none;font-size:2em;">
+			<pre id="epilogueText1"></pre>
+			<br>
+			<div id="epilogueKey">
+				<img draggable="false" src="https://MariosCode.github.io/petalsAroundTheRose/3w.png" style="display:inline" /> = 2
+				<br>
+				<img draggable="false" src="https://MariosCode.github.io/petalsAroundTheRose/5w.png" style="display:inline" /> = 4
+				<br>
+				<p id="clickOrTap2" style="color:#C7C7C7;" class="colorTransition" >(Press any key or tap your touchscreen to continue)</p>
+			</div>
+			<pre id="epilogueText2"></pre>
+			<p id="clickOrTap3" style="color:#C7C7C7;" class="colorTransition" >(Press any key or tap your touchscreen to continue)</p>
+			<pre id="epilogueText3"></pre>
+			<p id="clickOrTap4" style="color:#C7C7C7;" class="colorTransition" >(Press any key or tap your touchscreen to continue)</p>
+			<pre id="epilogueText4"></pre>
+			<p id="clickOrTap5" style="color:#C7C7C7;" class="colorTransition" >(Press any key or tap your touchscreen to continue)</p>
+			<pre id="epilogueText5"></pre>
+			<br>
+			<div id="epilogueSkip" onclick="functionContainer.skipEpilogue()">skip to end</div>
+			<input class="pointerCursor" id="returnToTitleButton" type="button" value="Return to title screen" onclick="functionContainer.returnToTitle()" style="font-size:0.5em;display:none;margin:auto;" />
+		</div>
+
+
+		<script>
+
+		var currentScreen = "loading";
+		var blinkerStatus = false;
+		var blinkerFrame = 0;
+		var blinkerInterval;
+		var prologueHelperInterval;
+		var epilogueHelperInterval;
+		var typeTextInterval;
+		var typeTextIndexCurrent;
+		var typeTextTargetOutput;
+		var typeTextElement;
+
+		var diceRolled = ["1w","1w","1w","1w","1w"];
+		var diceBag = ["1r","1g","1b","1w","2r","2g","2b","2w","3r","3g","3b","3w","4r","4g","4b","4w","5r","5g","5b","5w","6r","6g","6b","6w"];
+		var diceBagKey = [0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,4,4,4,4,0,0,0,0];
+
+		var currentAnswer = 0;
+		var consecutiveCorrect = 0;
+		var numberOfRolls = 0;
+		var numberOfIncorrect = 0;
+		var numberOfCorrect = 0;
+		var numberOfAsked = 0;
+		var secondsPassed = 0;
+		var secondsPassedInterval;
+
+		var minuteOrMinutes = "minutes";
+		var secondOrSeconds = "seconds";
+		var incorrectTimeOrTimes = "times";
+		var askedTimeOrTimes = "times";
+
+		var logoCanvas=document.getElementById("logoCanvas");
+		var logoCanvasContext=logoCanvas.getContext("2d");
+		var logoIMGPink = 101;
+		var logoIMGPinkFadeOut = false;
+		var grd;
+		var logoIMGInterval;
+
+		var pastDiceRolls = {}
+			pastDiceRolls.roll0 = {};
+			pastDiceRolls.roll0.answer = 0;
+			pastDiceRolls.roll0.die1 = {};
+			pastDiceRolls.roll0.die1.rotation = 0;
+			pastDiceRolls.roll0.die1.die = "1w";
+			pastDiceRolls.roll0.die2 = {};
+			pastDiceRolls.roll0.die2.rotation = 0;
+			pastDiceRolls.roll0.die2.die = "1w";
+			pastDiceRolls.roll0.die3 = {};
+			pastDiceRolls.roll0.die3.rotation = 0;
+			pastDiceRolls.roll0.die3.die = "1w";
+			pastDiceRolls.roll0.die4 = {};
+			pastDiceRolls.roll0.die4.rotation = 0;
+			pastDiceRolls.roll0.die4.die = "1w";
+			pastDiceRolls.roll0.die5 = {};
+			pastDiceRolls.roll0.die5.rotation = 0;
+			pastDiceRolls.roll0.die5.die = "1w";
+
+
+		document.ontouchstart = keyPress;
+		document.onmousedown=disableclick;
+
+		var pastRollsDiv = document.getElementById("pastRollsDiv");
+
+		function disableclick(event)
+		{
+		  if(event.button==2)
+		   {
+		     return false;    
+		   }
+		}
+
+		var imageContainerObject = {};
+			imageContainerObject.img1r = new Image();
+			imageContainerObject.img1g = new Image();
+			imageContainerObject.img1b = new Image();
+			imageContainerObject.img1w = new Image();
+			imageContainerObject.img2r = new Image();
+			imageContainerObject.img2g = new Image();
+			imageContainerObject.img2b = new Image();
+			imageContainerObject.img2w = new Image();
+			imageContainerObject.img3r = new Image();
+			imageContainerObject.img3g = new Image();
+			imageContainerObject.img3b = new Image();
+			imageContainerObject.img3w = new Image();
+			imageContainerObject.img4r = new Image();
+			imageContainerObject.img4g = new Image();
+			imageContainerObject.img4b = new Image();
+			imageContainerObject.img4w = new Image();
+			imageContainerObject.img5r = new Image();
+			imageContainerObject.img5g = new Image();
+			imageContainerObject.img5b = new Image();
+			imageContainerObject.img5w = new Image();
+			imageContainerObject.img6r = new Image();
+			imageContainerObject.img6g = new Image();
+			imageContainerObject.img6b = new Image();
+			imageContainerObject.img6w = new Image();
+			imageContainerObject.imglogoT = new Image();
+
+			imageContainerObject.totalNeedToLoad = ["1r","1g","1b","1w","2r","2g","2b","2w","3r","3g","3b","3w","4r","4g","4b","4w","5r","5g","5b","5w","6r","6g","6b","6w","logoT"];
+
+			imageContainerObject.needToLoad = ["1r","1g","1b","1w","2r","2g","2b","2w","3r","3g","3b","3w","4r","4g","4b","4w","5r","5g","5b","5w","6r","6g","6b","6w","logoT"];
+
+			imageContainerObject.loadingNow = [];
+
+			imageContainerObject.loadingNow1 = "";
+			imageContainerObject.loadingNow2 = "";
+			imageContainerObject.loadingNow3 = "";
+			imageContainerObject.loadingNow4 = "";
+			imageContainerObject.loadingNow5 = "";
+
+			imageContainerObject.loadingNow1TimeoutInterval = "";
+			imageContainerObject.loadingNow2TimeoutInterval = "";
+			imageContainerObject.loadingNow3TimeoutInterval = "";
+			imageContainerObject.loadingNow4TimeoutInterval = "";
+			imageContainerObject.loadingNow5TimeoutInterval = "";
+
+			imageContainerObject.loaded = [];
+
+		var loadingHelperNumber = 2;
+		var loadingHelperInterval;
+
+		function beginLoadingSequence()
+		{
+			loadingHelperInterval = setInterval(function(){
+				document.getElementById("loadingPre").innerHTML = "L O A D I N G";
+				for(i=1;i<=loadingHelperNumber;i++){
+					document.getElementById("loadingPre").innerHTML += " .";
+				}
+
+				if(loadingHelperNumber < 5){
+					for(i=5;i>loadingHelperNumber;i--){
+						document.getElementById("loadingPre").innerHTML += "  ";
+					}
+				}
+
+				loadingHelperNumber++;
+
+				if(loadingHelperNumber >= 6){
+					loadingHelperNumber = 1;
+				}
+			},1000);
+
+
+			document.getElementById("loadingPre1").innerHTML = "Loading 1r.png";
+			document.getElementById("loadingPre2").innerHTML = "Loading 1g.png";
+			document.getElementById("loadingPre3").innerHTML = "Loading 1b.png";
+			document.getElementById("loadingPre4").innerHTML = "Loading 1w.png";
+			document.getElementById("loadingPre5").innerHTML = "Loading 2r.png";
+
+			imageContainerObject.needToLoad.splice(imageContainerObject.needToLoad.indexOf("1r"),1);
+			imageContainerObject.needToLoad.splice(imageContainerObject.needToLoad.indexOf("1g"),1);
+			imageContainerObject.needToLoad.splice(imageContainerObject.needToLoad.indexOf("1b"),1);
+			imageContainerObject.needToLoad.splice(imageContainerObject.needToLoad.indexOf("1w"),1);
+			imageContainerObject.needToLoad.splice(imageContainerObject.needToLoad.indexOf("2r"),1);
+
+			imageContainerObject.loadingNow.push("1r");
+			imageContainerObject.loadingNow.push("1g");
+			imageContainerObject.loadingNow.push("1b");
+			imageContainerObject.loadingNow.push("1w");
+			imageContainerObject.loadingNow.push("2r");
+
+			imageContainerObject.loadingNow1 = "1r";
+			imageContainerObject.loadingNow2 = "1g";
+			imageContainerObject.loadingNow3 = "1b";
+			imageContainerObject.loadingNow4 = "1w";
+			imageContainerObject.loadingNow5 = "2r";
+
+			imageContainerObject.img1r.src="https://MariosCode.github.io/petalsAroundTheRose/1r.png";
+			imageContainerObject.img1g.src="https://MariosCode.github.io/petalsAroundTheRose/1g.png";
+			imageContainerObject.img1b.src="https://MariosCode.github.io/petalsAroundTheRose/1b.png";
+			imageContainerObject.img1w.src="https://MariosCode.github.io/petalsAroundTheRose/1w.png";
+			imageContainerObject.img2r.src="https://MariosCode.github.io/petalsAroundTheRose/2r.png";
+
+			imageContainerObject.img1r.onload = function(){
+				functionContainer.imageLoaded(1);
+			};
+
+			imageContainerObject.img1g.onload = function(){
+				functionContainer.imageLoaded(2);
+			};
+
+			imageContainerObject.img1b.onload = function(){
+				functionContainer.imageLoaded(3);
+			};
+
+			imageContainerObject.img1w.onload = function(){
+				functionContainer.imageLoaded(4);
+			};
+
+			imageContainerObject.img2r.onload = function(){
+				functionContainer.imageLoaded(5);
+			};
+
+			imageContainerObject["loadingNow1TimeoutInterval"] = setInterval(function(){
+				functionContainer.imageTimeout(1);
+			},5000);
+
+			imageContainerObject["loadingNow2TimeoutInterval"] = setInterval(function(){
+				functionContainer.imageTimeout(2);
+
+			},5000);
+
+			imageContainerObject["loadingNow3TimeoutInterval"] = setInterval(function(){
+				functionContainer.imageTimeout(3);
+
+			},5000);
+
+			imageContainerObject["loadingNow4TimeoutInterval"] = setInterval(function(){
+				functionContainer.imageTimeout(4);
+
+			},5000);
+
+			imageContainerObject["loadingNow5TimeoutInterval"] = setInterval(function(){
+				functionContainer.imageTimeout(5);
+
+			},5000);
+		}
+
+		
+
+
+
+			function startGame()
+			{
+				document.getElementById("titleScreenContainer").style.display="none";
+				document.getElementById("prologueContainer").style.display="block";
+				currentScreen = "prologue1x1";
+				typeText("prologueText","I can tell you three things.",75,"prologue1x1Conclude");
+
+				clearInterval(logoIMGInterval);
+			}
+
+			function keyPress(event)
+			{
+				switch(currentScreen)
+				{
+					case "prologue1x2":
+						clearInterval(prologueHelperInterval);
+						document.getElementById("clickOrTap1").style.color="#C7C7C7";
+						currentScreen = "prologue2x1";
+						typeText("prologueText","The name of this game is Petals Around The Rose.",75,"prologue2x1Conclude");
+						break;
+					case "prologue2x2":
+						clearInterval(prologueHelperInterval);
+						document.getElementById("clickOrTap1").style.color="#C7C7C7";
+						currentScreen = "prologue3x1";
+						typeText("prologueText","The answer will always be even.",75,"prologue3x1Conclude");
+						break;
+					case "prologue3x2":
+						clearInterval(prologueHelperInterval);
+						document.getElementById("clickOrTap1").style.color="#C7C7C7";
+						currentScreen = "prologue4x1";
+						typeText("prologueText","Lastly, I can tell you the answer for any dice roll.",75,"prologue4x1Conclude");
+						break;
+					case "prologue4x2":
+						clearInterval(prologueHelperInterval);
+						document.getElementById("clickOrTap1").style.color="#C7C7C7";
+						currentScreen = "prologue5x1";
+						typeText("prologueText","Now roll your dice.",75,"prologue5x1Conclude");
+						break;
+					case "prologue5x2":
+						clearInterval(prologueHelperInterval);
+						clearInterval(blinkerInterval);
+						document.getElementById("clickOrTap1").style.color="#C7C7C7";
+						functionContainer.firstDiceRoll();
+						break;
+					case "epilogue1x2":
+						clearInterval(epilogueHelperInterval);
+						clearInterval(blinkerInterval);
+						document.getElementById("epilogueText1").innerHTML = "Well done. It seems you have figured out how to determine the answer.&nbsp;";
+						currentScreen = "epilogue2x1";
+						document.getElementById("clickOrTap2").style.color="#C7C7C7";
+						if(Math.floor(secondsPassed/60) == 1)
+						{
+							minuteOrMinutes = "minute";
+						}
+						else
+						{
+							minuteOrMinutes = "minutes";secondOrSeconds
+						}
+
+						if((secondsPassed%60) == 1)
+						{
+							secondOrSeconds = "second";
+						}
+						else
+						{
+							secondOrSeconds = "seconds";
+						}
+
+						if(numberOfIncorrect == 1)
+						{
+							incorrectTimeOrTimes = "time";
+						}
+						else
+						{
+							incorrectTimeOrTimes = "times";
+						}
+
+						if(numberOfAsked == 1)
+						{
+							askedTimeOrTimes = "time";
+						}
+						else
+						{
+							askedTimeOrTimes = "times";
+						}
+						typeText("epilogueText2","It took you " + numberOfRolls + " rolls in " + Math.floor(secondsPassed/60) + " " + minuteOrMinutes + " and " + (secondsPassed%60) + " " + secondOrSeconds + ".",75,"epilogue2x1Conclude");
+						break;
+					case "epilogue2x2":
+						clearInterval(epilogueHelperInterval);
+						clearInterval(blinkerInterval);
+						document.getElementById("epilogueText2").innerHTML = "It took you " + numberOfRolls + " rolls in " + Math.floor(secondsPassed/60) + " " + minuteOrMinutes + " and " + (secondsPassed%60) + " " + secondOrSeconds + ".&nbsp;";
+						currentScreen = "epilogue3x1";
+						document.getElementById("clickOrTap3").style.color="#C7C7C7";
+						typeText("epilogueText3","You guessed incorrectly " + numberOfIncorrect + " " + incorrectTimeOrTimes + ".",75,"epilogue3x1Conclude");
+						break;
+					case "epilogue3x2":
+						clearInterval(epilogueHelperInterval);
+						clearInterval(blinkerInterval);
+						document.getElementById("epilogueText3").innerHTML = "You guessed incorrectly " + numberOfIncorrect + " " + incorrectTimeOrTimes + ".&nbsp;";
+						currentScreen = "epilogue4x1";
+						document.getElementById("clickOrTap4").style.color="#C7C7C7";
+						typeText("epilogueText4","You guessed correctly " + numberOfCorrect + " times.",75,"epilogue4x1Conclude");
+						break;
+					case "epilogue4x2":
+						clearInterval(epilogueHelperInterval);
+						clearInterval(blinkerInterval);
+						document.getElementById("epilogueText4").innerHTML = "You guessed correctly " + numberOfCorrect + " times.&nbsp;";
+						currentScreen = "epilogue5x1";
+						document.getElementById("clickOrTap5").style.color="#C7C7C7";
+						typeText("epilogueText5","You asked me for the answer " + numberOfAsked + " " + askedTimeOrTimes + ".",75,"epilogue5x1Conclude");
+						break;
+
+						case "gameScreenGuessed":
+						if(event.which==13){
+							functionContainer.rollAgain();
+							break;
+						}
+				}
+			}
+
+			function keyPressAtGuessField(event){
+				if(event.which == 13 && currentScreen == "gameScreenGuessing" && document.getElementById("diceAnswerGuess").value != ""){
+					functionContainer.submitGuess();
+					functionContainer.stopPropagation(event);
+				}
+			}
+
+			function typeText(elementID,textString,speed,afterFunction)
+			{
+				clearInterval(blinkerInterval);
+				clearInterval(typeTextInterval);
+				typeTextElement = document.getElementById(elementID);
+				typeTextIndexCurrent = 0;
+				typeTextTargetOutput = textString;
+
+				typeTextInterval = setInterval(function(){
+					if(typeTextIndexCurrent < typeTextTargetOutput.length)
+					{
+						typeTextElement.innerHTML = typeTextTargetOutput.substring(0,typeTextIndexCurrent) + "|";
+						typeTextIndexCurrent++;
+					}
+					else
+					{
+						typeTextElement.innerHTML = typeTextTargetOutput.substring(0,typeTextIndexCurrent) + "|";
+						functionContainer[afterFunction]();
+						clearInterval(typeTextInterval);
+					}
+				},speed);
+			}
+
+			var functionContainer = {};
+
+			functionContainer.prologue1x1Conclude = function()
+			{
+				currentScreen = "prologue1x2";
+				functionContainer.drawBlinker("prologueText","I can tell you three things.");
+				prologueHelperInterval = setInterval(function(){document.getElementById("clickOrTap1").style.color="black"} , 1500);
+			}
+
+			functionContainer.prologue2x1Conclude = function()
+			{
+				currentScreen = "prologue2x2";
+				functionContainer.drawBlinker("prologueText","The name of this game is Petals Around The Rose.");
+				prologueHelperInterval = setInterval(function(){document.getElementById("clickOrTap1").style.color="black"} , 1500);
+			}
+
+			functionContainer.prologue3x1Conclude = function()
+			{
+				currentScreen = "prologue3x2";
+				functionContainer.drawBlinker("prologueText","The answer will always be even.");
+				prologueHelperInterval = setInterval(function(){document.getElementById("clickOrTap1").style.color="black"} , 1500);
+			}
+
+			functionContainer.prologue4x1Conclude = function()
+			{
+				currentScreen = "prologue4x2";
+				functionContainer.drawBlinker("prologueText","Lastly, I can tell you the answer for any dice roll.");
+				prologueHelperInterval = setInterval(function(){document.getElementById("clickOrTap1").style.color="black"} , 1500);
+			}
+
+			functionContainer.prologue5x1Conclude = function()
+			{
+				currentScreen = "prologue5x2";
+				functionContainer.drawBlinker("prologueText","Now roll your dice.");
+				prologueHelperInterval = setInterval(function(){document.getElementById("clickOrTap1").style.color="black"} , 1500);
+			}
+
+			functionContainer.epilogue1x1Conclude = function()
+			{
+				document.getElementById("epilogueKey").style.opacity = 1;
+				currentScreen = "epilogue1x2";
+				functionContainer.drawBlinker("epilogueText1","Well done. It seems you have figured out how to determine the answer.");
+				epilogueHelperInterval = setInterval(function(){document.getElementById("clickOrTap2").style.color="black"} , 1500);
+			}
+
+			functionContainer.epilogue2x1Conclude = function()
+			{
+				currentScreen = "epilogue2x2";
+				functionContainer.drawBlinker("epilogueText2","It took you " + numberOfRolls + " rolls in " + Math.floor(secondsPassed/60) + " " + minuteOrMinutes + " and " + (secondsPassed%60) + " " + secondOrSeconds + ".");
+				epilogueHelperInterval = setInterval(function(){document.getElementById("clickOrTap3").style.color="black"} , 1500);
+
+			}
+
+			functionContainer.epilogue3x1Conclude = function()
+			{
+				currentScreen = "epilogue3x2";
+				functionContainer.drawBlinker("epilogueText3","You guessed incorrectly " + numberOfIncorrect + " " + incorrectTimeOrTimes + ".");
+				epilogueHelperInterval = setInterval(function(){document.getElementById("clickOrTap4").style.color="black"} , 1500);
+
+			}
+
+			functionContainer.epilogue4x1Conclude = function()
+			{
+				currentScreen = "epilogue4x2";
+				functionContainer.drawBlinker("epilogueText4","You guessed correctly " + numberOfCorrect + " times.");
+				epilogueHelperInterval = setInterval(function(){document.getElementById("clickOrTap5").style.color="black"} , 1500);
+
+			}
+
+			functionContainer.epilogue5x1Conclude = function()
+			{
+				currentScreen = "epilogue5x2";
+				document.getElementById("epilogueText5").innerHTML = "You asked me for the answer " + numberOfAsked + " " + askedTimeOrTimes + ".&nbsp;";
+				document.getElementById("returnToTitleButton").style.display="block";
+				document.getElementById("epilogueSkip").style.display="none";
+			}
+
+			functionContainer.drawBlinker = function(elementID,textString)
+			{
+				clearInterval(blinkerInterval);
+				blinkerStatus = true;
+				blinkerFrame = 0;
+				elementID = document.getElementById(elementID);
+
+				blinkerInterval = setInterval(function(){if(blinkerFrame){elementID.innerHTML=textString+"|";blinkerFrame=0}else{elementID.innerHTML=textString + "&nbsp;";blinkerFrame=1}} , 500);
+			}
+
+			functionContainer.prologueHelper = function()
+			{
+				document.getElementById("prologueContainer").style.display="none";
+			}
+
+			functionContainer.firstDiceRoll = function()
+			{
+				secondsPassedInterval = setInterval(function()
+				{
+					secondsPassed++;
+				},1000);
+
+				numberOfRolls = 0;
+				numberOfIncorrect = 0;
+				numberOfCorrect = 0;
+				numberOfAsked = 0;
+				secondsPassed = 0;
+				pastDiceRolls = {};
+				isFirstDiceRoll = true;
+				document.getElementById("submitGuessButton").style.display = "inline";
+				document.getElementById("rollAgainButton1").style.display = "none";
+				document.getElementById("gameScreenToldAnswerContainer").style.display = "none";
+				document.getElementById("toldAnswer").style.color = "#C7C7C7";
+				document.getElementById("wrongAnswer").style.color = "#C7C7C7";
+				document.getElementById("correctAnswer").style.color = "#C7C7C7";
+				document.getElementById("diceAnswerGuess").disabled = false;
+				document.getElementById("tellMeAnswerButton").style.display="none";
+				document.getElementById("submitGuessButton").disabled = false;
+				document.getElementById("gameScreenHintContainer").style.display="block";
+				document.getElementById("gameScreenWrongAnswerContainer").style.display="none";
+				document.getElementById("gameScreenCorrectAnswerContainer").style.display="none";
+				document.getElementById("tellMeButton").style.display="block";
+
+				document.getElementById("pastRollsDiv").innerHTML = "";
+
+				document.getElementById("epilogueText1").innerHTML="";
+				document.getElementById("epilogueText2").innerHTML="";
+				document.getElementById("epilogueText3").innerHTML="";
+				document.getElementById("epilogueText4").innerHTML="";
+				document.getElementById("epilogueText5").innerHTML="";
+				document.getElementById("returnToTitleButton").style.display="none";
+				document.getElementById("epilogueSkip").style.display="block";
+				document.getElementById("epilogueKey").style.opacity = 0;
+
+				document.getElementById("gameScreenHint1").style.color = "#C7C7C7";
+				document.getElementById("gameScreenHint2").style.color = "#C7C7C7";
+				document.getElementById("gameScreenHint3").style.color = "#C7C7C7";
+				document.getElementById("gameScreenHint4").style.color = "#C7C7C7";
+
+				consecutiveCorrect = 0;
+
+				document.getElementById("prologueContainer").style.display="none";
+				document.getElementById("gameScreenContainer").style.display="block";
+				currentScreen = "gameScreenGuessing";
+
+				functionContainer.generateDice();
+			}
+
+			functionContainer.generateDice = function()
+			{
+				document.getElementById("diceAnswerGuess").value = "";
+				document.getElementById("gameScreenHintContainer").style.display="block";
+
+				document.getElementById("gameScreenHint1").style.color = "#C7C7C7";
+				document.getElementById("gameScreenHint2").style.color = "#C7C7C7";
+				document.getElementById("gameScreenHint3").style.color = "#C7C7C7";
+				document.getElementById("gameScreenHint4").style.color = "#C7C7C7";
+				document.getElementById("tellMeAnswerButton").style.display = "none";
+
+				currentAnswer = 0;
+				numberOfRolls++;
+				diceRolled = [];
+				pastDiceRolls["roll" + numberOfRolls] = {};
+
+				for(i=1;i<=5;i++)
+				{
+					var dieRoll = Math.floor(Math.random()*24);
+					var rotateRoll = Math.floor(Math.random()*22);
+					rotateRoll -= 11;
+					diceRolled.push(diceBag[dieRoll]);
+					currentAnswer+=diceBagKey[dieRoll];
+					document.getElementById("die" + i + "IMG").src=imageContainerObject["img" + diceBag[dieRoll]].src;
+					document.getElementById("die" + i + "IMG").style.webkitTransform = "rotate(" + rotateRoll + "deg)";
+					document.getElementById("die" + i + "IMG").style.MozTransform = "rotate(" + rotateRoll + "deg)";
+					document.getElementById("die" + i + "IMG").style.msTransform = "rotate(" + rotateRoll + "deg)";
+					document.getElementById("die" + i + "IMG").style.OTransform = "rotate(" + rotateRoll + "deg)";
+					document.getElementById("die" + i + "IMG").style.transform = "rotate(" + rotateRoll + "deg)";
+
+
+					
+					pastDiceRolls["roll" + numberOfRolls]["die"+i] = {};
+					pastDiceRolls["roll" + numberOfRolls]["die"+i].rotation = rotateRoll;
+					pastDiceRolls["roll" + numberOfRolls]["die"+i].die = diceBag[dieRoll];
+				}
+				pastDiceRolls["roll" + numberOfRolls].answer = currentAnswer;
+				
+			}
+
+			functionContainer.submitGuess = function()
+			{
+				if(document.getElementById("diceAnswerGuess").value == "")
+				{
+					return;
+				}
+
+				functionContainer.drawPastRoll();
+
+				document.getElementById("submitGuessButton").style.display = "none";
+				document.getElementById("rollAgainButton1").style.display = "inline";
+				document.getElementById("gameScreenHintContainer").style.display="none";
+
+				document.getElementById("gameScreenHint1").style.color = "#C7C7C7";
+				document.getElementById("gameScreenHint2").style.color = "#C7C7C7";
+				document.getElementById("gameScreenHint3").style.color = "#C7C7C7";
+				document.getElementById("gameScreenHint4").style.color = "#C7C7C7";
+				document.getElementById("tellMeAnswerButton").style.display = "none";
+
+				document.getElementById("tellMeButton").style.display="none";
+				document.getElementById("diceAnswerGuess").disabled = true;
+
+				currentScreen = "gameScreenGuessed";
+
+				if(document.getElementById("diceAnswerGuess").value == currentAnswer)
+				{
+					numberOfCorrect++;
+					consecutiveCorrect++;
+
+					if(consecutiveCorrect >= 6)
+					{
+						clearInterval(secondsPassedInterval);
+						document.getElementById("gameScreenContainer").style.display="none";
+						document.getElementById("epilogueContainer").style.display="block";
+						document.getElementById("epilogueSkip").style.display="block";
+						currentScreen = "epilogue1x1";
+						typeText("epilogueText1","Well done. It seems you have figured out how to determine the answer.",75,"epilogue1x1Conclude");
+					}
+					else
+					{
+						document.getElementById("gameScreenCorrectAnswerContainer").style.display = "block";
+						if(consecutiveCorrect != 5)
+						{
+							document.getElementById("correctAnswer").innerHTML = "You are correct, the answer is " + currentAnswer + ". If you can tell me the answer for the next " + (6-consecutiveCorrect) + " rolls, you will have won this game.";
+						}
+						else
+						{
+							document.getElementById("correctAnswer").innerHTML = "You are correct, the answer is " + currentAnswer + ". If you can tell me the answer of the next roll, you will have won this game.";
+						}
+
+						setTimeout(function(){
+							document.getElementById("correctAnswer").style.color = "black";
+						},40);
+					}
+					
+				}
+				else
+				{
+					consecutiveCorrect = 0;
+					numberOfIncorrect++;
+					document.getElementById("gameScreenWrongAnswerContainer").style.display = "block";
+					document.getElementById("wrongAnswer").innerHTML = "You are wrong, the answer was " + currentAnswer + ".";
+
+					setTimeout(function(){
+						document.getElementById("wrongAnswer").style.color = "black";
+					},40);
+				}
+				
+			}
+
+			functionContainer.tellMe = function()
+			{
+				document.getElementById("tellMeButton").style.display="none";
+				document.getElementById("submitGuessButton").disabled = true;
+
+				document.getElementById("gameScreenHint1").style.color = "black";
+				document.getElementById("gameScreenHint2").style.color = "black";
+				document.getElementById("gameScreenHint3").style.color = "black";
+				document.getElementById("gameScreenHint4").style.color = "black";
+
+				setTimeout(function(){
+					document.getElementById("tellMeAnswerButton").style.display="block";
+					document.getElementById("submitGuessButton").disabled = false;
+				},1000);
+
+			}
+
+			functionContainer.tellMeAnswer = function()
+			{
+				consecutiveCorrect = 0;
+				numberOfAsked++;
+				document.getElementById("tellMeAnswerButton").style.display="none";
+				document.getElementById("submitGuessButton").style.display = "none";
+				document.getElementById("rollAgainButton1").style.display = "inline";
+				document.getElementById("gameScreenToldAnswerContainer").style.display = "block";
+				document.getElementById("diceAnswerGuess").disabled = true;
+				document.getElementById("toldAnswer").innerHTML = "The answer was " + currentAnswer + ".";
+				functionContainer.drawPastRoll();
+
+				currentScreen = "gameScreenGuessed";
+
+				setTimeout(function(){
+					document.getElementById("toldAnswer").style.color = "black";
+				},40);
+				
+			}
+
+			functionContainer.rollAgain = function()
+			{
+				document.getElementById("submitGuessButton").style.display = "inline";
+				document.getElementById("rollAgainButton1").style.display = "none";
+				document.getElementById("gameScreenToldAnswerContainer").style.display = "none";
+				document.getElementById("toldAnswer").style.color = "#C7C7C7";
+				document.getElementById("wrongAnswer").style.color = "#C7C7C7";
+				document.getElementById("correctAnswer").style.color = "#C7C7C7";
+				document.getElementById("diceAnswerGuess").disabled = false;
+				document.getElementById("tellMeAnswerButton").style.display="none";
+				document.getElementById("submitGuessButton").disabled = false;
+				document.getElementById("gameScreenWrongAnswerContainer").style.display="none";
+				document.getElementById("gameScreenCorrectAnswerContainer").style.display="none";
+				document.getElementById("tellMeButton").style.display="block";
+
+				document.getElementById("gameScreenHint1").style.color = "#C7C7C7";
+				document.getElementById("gameScreenHint2").style.color = "#C7C7C7";
+				document.getElementById("gameScreenHint3").style.color = "#C7C7C7";
+				document.getElementById("gameScreenHint4").style.color = "#C7C7C7";
+
+				currentScreen = "gameScreenGuessing";
+
+				functionContainer.generateDice();
+			}
+
+			functionContainer.returnToTitle = function()
+			{
+				document.getElementById("epilogueContainer").style.display="none";
+				document.getElementById("titleScreenContainer").style.display="block";
+				document.getElementById("prologueText").innerHTML="";
+				currentScreen = "title";
+
+				logoIMGPink = 101;
+				logoIMGPinkFadeOut = false;
+
+				grd = logoCanvasContext.createRadialGradient(450, 450, 101, 450, 450, 450);
+				grd.addColorStop(0,"#FF6E6E");
+				grd.addColorStop(1,"#C7C7C7");
+
+				logoCanvasContext.fillStyle=grd;
+				logoCanvasContext.fillRect(0,0,900,900);
+
+				logoCanvasContext.drawImage(imageContainerObject.imglogoT,0,0);
+
+				functionContainer.initiateLogoIMGInterval();
+				
+			}
+
+			functionContainer.skipPrologue = function()
+			{
+				clearInterval(prologueHelperInterval);
+				clearInterval(blinkerInterval);
+				clearInterval(typeTextInterval);
+				document.getElementById("clickOrTap1").style.color="#C7C7C7";
+				functionContainer.firstDiceRoll();
+			}
+
+			functionContainer.skipEpilogue = function()
+			{
+				clearInterval(epilogueHelperInterval);
+				clearInterval(blinkerInterval);
+				clearInterval(typeTextInterval);
+				document.getElementById("epilogueKey").style.opacity = 1;
+				currentScreen = "epilogue5x2";
+				document.getElementById("clickOrTap2").style.color="#C7C7C7";
+				document.getElementById("clickOrTap3").style.color="#C7C7C7";
+				document.getElementById("clickOrTap4").style.color="#C7C7C7";
+				document.getElementById("clickOrTap5").style.color="#C7C7C7";
+
+				document.getElementById("returnToTitleButton").style.display="block";
+				document.getElementById("epilogueSkip").style.display="none";
+
+				if(Math.floor(secondsPassed/60) == 1)
+				{
+					minuteOrMinutes = "minute";
+				}
+				else
+				{
+					minuteOrMinutes = "minutes";secondOrSeconds
+				}
+
+				if((secondsPassed%60) == 1)
+				{
+					secondOrSeconds = "second";
+				}
+				else
+				{
+					secondOrSeconds = "seconds";
+				}
+
+				if(numberOfIncorrect == 1)
+				{
+					incorrectTimeOrTimes = "time";
+				}
+				else
+				{
+					incorrectTimeOrTimes = "times";
+				}
+
+				if(numberOfAsked == 1)
+				{
+					askedTimeOrTimes = "time";
+				}
+				else
+				{
+					askedTimeOrTimes = "times";
+				}
+
+				document.getElementById("epilogueText1").innerHTML = "Well done. It seems you have figured out how to determine the answer.&nbsp;";
+				document.getElementById("epilogueText2").innerHTML = "It took you " + numberOfRolls + " rolls in " + Math.floor(secondsPassed/60) + " " + minuteOrMinutes + " and " + (secondsPassed%60) + " " + secondOrSeconds + ".&nbsp;";
+				document.getElementById("epilogueText3").innerHTML = "You guessed incorrectly " + numberOfIncorrect + " " + incorrectTimeOrTimes + ".&nbsp;";
+				document.getElementById("epilogueText4").innerHTML = "You guessed correctly " + numberOfCorrect + " times.&nbsp;";	
+				document.getElementById("epilogueText5").innerHTML = "You asked me for the answer " + numberOfAsked + " " + askedTimeOrTimes + ".&nbsp;";
+			}
+
+			functionContainer.initiateLogoIMGInterval = function()
+			{
+				logoIMGInterval = setInterval(function(){
+					if(logoIMGPink <= 50 && logoIMGPinkFadeOut)
+					{
+						logoIMGPinkFadeOut = false;
+					}
+					if(logoIMGPink >= 300 && !logoIMGPinkFadeOut)
+					{
+						logoIMGPinkFadeOut = true;
+					}
+					if(logoIMGPinkFadeOut)
+					{
+						logoIMGPink-= 1.5;
+					}
+					if(!logoIMGPinkFadeOut)
+					{
+						logoIMGPink+= 1.5;
+					}
+
+
+					grd = logoCanvasContext.createRadialGradient(450, 450, logoIMGPink, 450, 450, 450);
+					grd.addColorStop(0,"#FF6E6E");
+					grd.addColorStop(1,"#C7C7C7");
+
+					logoCanvasContext.fillStyle=grd;
+					logoCanvasContext.fillRect(0,0,900,900);
+
+					logoCanvasContext.drawImage(imageContainerObject.imglogoT,0,0);   
+					
+				},16);
+			}
+
+			functionContainer.stopPropagation = function(event){
+			    if (!event)
+			      event = window.event;
+
+			    //IE9 & Other Browsers
+			    if (event.stopPropagation) {
+			      event.stopPropagation();
+			    }
+			    //IE8 and Lower
+			    else {
+			      event.cancelBubble = true;
+			    }
+			}
+
+			functionContainer.initiateTitleScreen = function(){
+			    functionContainer.initiateLogoIMGInterval();
+
+			    clearInterval(loadingHelperInterval);
+				document.getElementById("loadingScreenContainer").style.display="none";
+				document.getElementById("titleScreenContainer").style.display="block";
+				currentScreen = "title";
+
+				grd = logoCanvasContext.createRadialGradient(450, 450, 101, 450, 450, 450);
+				grd.addColorStop(0,"#FF6E6E");
+				grd.addColorStop(1,"#C7C7C7");
+
+				logoCanvasContext.fillStyle=grd;
+				logoCanvasContext.fillRect(0,0,900,900);
+
+				logoCanvasContext.drawImage(imageContainerObject.imglogoT,0,0);
+
+				functionContainer.initiateLogoIMGInterval();
+			}
+
+			functionContainer.imageLoaded = function(loadingID){
+			    clearInterval(imageContainerObject["loadingNow"+loadingID+"TimeoutInterval"]);
+				imageContainerObject.loadingNow.splice(imageContainerObject.loadingNow.indexOf(imageContainerObject["loadingNow"+loadingID]),1);
+				imageContainerObject.loaded.push(imageContainerObject["loadingNow"+loadingID]);
+				document.getElementById("loadingPre" + loadingID).innerHTML = "";
+				document.getElementById("loadingProgressBar").value = Math.floor((imageContainerObject.loaded.length/imageContainerObject.totalNeedToLoad.length)*100);
+
+				if(imageContainerObject.needToLoad.length>0){
+					imageContainerObject.loadingNow.push(imageContainerObject.needToLoad[0]);
+					imageContainerObject["loadingNow"+loadingID] = imageContainerObject.needToLoad[0];
+					document.getElementById("loadingPre" + loadingID).innerHTML = "loading " + imageContainerObject.needToLoad[0] + ".png";
+
+					imageContainerObject["img" + imageContainerObject.needToLoad[0]].src="https://MariosCode.github.io/petalsAroundTheRose/" + imageContainerObject.needToLoad[0] + ".png";
+
+					switch(loadingID){
+						case 1:
+						    imageContainerObject["img" + imageContainerObject.needToLoad[0]].onload = function(){
+								functionContainer.imageLoaded(1);
+							}
+							break;
+						case 2:
+						    imageContainerObject["img" + imageContainerObject.needToLoad[0]].onload = function(){
+								functionContainer.imageLoaded(2);
+							}
+							break;
+						case 3:
+						    imageContainerObject["img" + imageContainerObject.needToLoad[0]].onload = function(){
+								functionContainer.imageLoaded(3);
+							}
+							break;
+						case 4:
+						    imageContainerObject["img" + imageContainerObject.needToLoad[0]].onload = function(){
+								functionContainer.imageLoaded(4);
+							}
+							break;
+						case 5:
+						    imageContainerObject["img" + imageContainerObject.needToLoad[0]].onload = function(){
+								functionContainer.imageLoaded(5);
+							}
+							break;
+					}
+
+					functionContainer.initiateImageTimeoutInteral(loadingID);
+
+					imageContainerObject.needToLoad.splice(0,1);
+				} else if(imageContainerObject.loadingNow.length<=0){
+					functionContainer.initiateTitleScreen();
+				} else {
+					imageContainerObject["loadingNow"+loadingID] = "";
+				}
+			}
+
+			functionContainer.initiateImageTimeoutInteral = function(loadingID){
+				switch(loadingID){
+					case 1:
+					    imageContainerObject["loadingNow1TimeoutInterval"] = setInterval(function(){
+							functionContainer.imageTimeout(1);
+						},5000);
+						break;
+					case 2:
+					    imageContainerObject["loadingNow2TimeoutInterval"] = setInterval(function(){
+							functionContainer.imageTimeout(2);
+						},5000);
+						break;
+					case 3:
+					    imageContainerObject["loadingNow3TimeoutInterval"] = setInterval(function(){
+							functionContainer.imageTimeout(3);
+						},5000);
+						break;
+					case 4:
+					    imageContainerObject["loadingNow4TimeoutInterval"] = setInterval(function(){
+							functionContainer.imageTimeout(4);
+						},5000);
+						break;
+					case 5:
+					    imageContainerObject["loadingNow5TimeoutInterval"] = setInterval(function(){
+							functionContainer.imageTimeout(5);
+						},5000);
+						break;
+				}
+			}
+
+			functionContainer.imageTimeout = function(loadingID){
+
+			    document.getElementById("loadingPre"+loadingID).innerHTML = "retrying "+imageContainerObject["loadingNow"+loadingID]+".png";
+			    imageContainerObject["img"+imageContainerObject["loadingNow"+loadingID]].src="https://MariosCode.github.io/petalsAroundTheRose/" + imageContainerObject["loadingNow"+loadingID] + ".png";
+			    switch(loadingID){
+					case 1:
+					    imageContainerObject["img" + imageContainerObject["loadingNow"+loadingID]].onload = function(){
+							functionContainer.imageLoaded(1);
+						}
+						break;
+					case 2:
+					    imageContainerObject["img" + imageContainerObject["loadingNow"+loadingID]].onload = function(){
+							functionContainer.imageLoaded(2);
+						}
+						break;
+					case 3:
+					    imageContainerObject["img" + imageContainerObject["loadingNow"+loadingID]].onload = function(){
+							functionContainer.imageLoaded(3);
+						}
+						break;
+					case 4:
+					    imageContainerObject["img" + imageContainerObject["loadingNow"+loadingID]].onload = function(){
+							functionContainer.imageLoaded(4);
+						}
+						break;
+					case 5:
+					    imageContainerObject["img" + imageContainerObject["loadingNow"+loadingID]].onload = function(){
+							functionContainer.imageLoaded(5);
+						}
+						break;
+				}
+			}
+
+			functionContainer.drawPastRoll = function(loadingID){
+				pastRollsDiv.innerHTML += "<div><br>";
+				pastRollsDiv.innerHTML += "<pre>ROLL " + numberOfRolls + "</pre>";
+
+				for(i=1;i<6;i++){
+
+					pastRollsDiv.innerHTML += "<img style='-webkit-transform:rotate(" + pastDiceRolls["roll" + numberOfRolls]["die"+i].rotation + "deg);-moz-transform:rotate(" + pastDiceRolls["roll" + numberOfRolls]["die"+i].rotation + "deg);-ms-transform:rotate(" + pastDiceRolls["roll" + numberOfRolls]["die"+i].rotation + "deg);-o-transform:rotate(" + pastDiceRolls["roll" + numberOfRolls]["die"+i].rotation + "deg);transform:rotate(" + pastDiceRolls["roll" + numberOfRolls]["die"+i].rotation + "deg);' draggable='false' class='defaultCursor' src='https://MariosCode.github.io/petalsAroundTheRose/" + pastDiceRolls["roll" + numberOfRolls]["die"+i].die + ".png' />\n";
+				}
+
+				pastRollsDiv.innerHTML += "<pre>ANSWER: " + pastDiceRolls["roll" + numberOfRolls].answer + "</pre></div><br><hr>";
+				
+			}
+
+			beginLoadingSequence();
+
+			
+
+		</script>
+
+	</body>
+</html>
