@@ -1,4 +1,8 @@
-console.log("Reginub script loaded!");
+var socketioCDN = document.createElement('script');
+socketioCDN.type = 'text/javascript';
+socketioCDN.src = 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js';
+document.body.appendChild(socketioCDN);
+
 var MC_div1 = document.createElement('div');
 MC_div1.style.position = "absolute";
 MC_div1.style.width = "32px";
