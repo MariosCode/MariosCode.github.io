@@ -39,7 +39,7 @@ document.body.appendChild(mc_div2);
 //9002 - iframe for petals around the rose game
 var mc_iframe_game_petalsaroundtherose = document.createElement("iframe");
         mc_iframe_game_petalsaroundtherose.setAttribute("src", "https://MariosCode.github.io/petalsAroundTheRose.html");
-        Object.assign(mc_iframe_game_petalsaroundtherose.style,{position: "absolute", top: "0px", width: "100%", height: "100%", display:"none", zIndex: "9002"});
+        Object.assign(mc_iframe_game_petalsaroundtherose.style,{position: "absolute", top: "0px", width: "100%", height: "100%", zIndex: "9002"});
         mc_div2.appendChild(mc_iframe_game_petalsaroundtherose);
 
 
